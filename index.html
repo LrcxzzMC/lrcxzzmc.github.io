@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kicoso - 创造与编程</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image: url('./bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #555;
+            line-height: 1.6;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 250, 245, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 15px 5%;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        header.shrink {
+            padding: 8px 5%;
+            background-color: rgba(255, 253, 252, 0.98);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-text {
+            margin-left: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #ff7eb9;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        header.shrink .logo img {
+            height: 35px;
+        }
+        
+        header.shrink .logo-text {
+            opacity: 0;
+            display: none;
+        }
+        
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #5a7d9a;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 126, 185, 0.1);
+            color: #ff7eb9;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .gradient-text {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff7eb9, #7a9eff, #38cbd8, #7affaf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 20px;
+            margin: 50px 0;
+            transition: all 0.5s ease;
+        }
+        
+        .gradient-text:hover {
+            transform: scale(1.05);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 内容区块样式 */
+        .content-section {
+            margin: 60px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #fef2fb 100%);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-section h2 {
+            color: #ff7eb9;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* 特性网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #7a9eff;
+        }
+        
+        .feature-card h3 {
+            color: #5a7d9a;
+            margin-bottom: 15px;
+        }
+        
+        /* 滚动提示 */
+        .scroll-hint {
+            text-align: center;
+            margin: 50px 0;
+            color: #7a9eff;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff7eb9, #7a9eff);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 5%;
+            }
+            
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+            }
+            
+            .gradient-text {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header id="header">
+        <div class="logo">
+            <img src="./kicoso.png" alt="Kicoso Logo">
+            <span class="logo-text">kicoso</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./products.html">我们的产品</a></li>
+                <li><a href="./about.html">关于</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <div class="gradient-text">Crate, and programming!</div>
+        
+        <div class="scroll-hint">
+            <i class="fas fa-chevron-down"></i> 向下滚动探索更多内容 <i class="fas fa-chevron-down"></i>
+        </div>
+        
+        <!-- 内容区块1 -->
+        <div class="content-section">
+            <h2>欢迎来到 Kicoso</h2>
+            <p>我们致力于创造屎山一样的编程解决方案，让技术变成赤石。</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>创新设计</h3>
+                    <p>我们不断探索新的设计理念，为编程师造成更大压力</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>屎山代码</h3>
+                    <p>不用多说</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>屎山至上</h3>
+                    <p>屎山不知不觉中出现了</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 内容区块2 -->
+        <div class="content-section">
+            <h2>我们的理念</h2>
+            <p>我们没有任何理念</p>
+            <p>你看啥</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>屎山与臃肿</h3>
+                    <p>无需多盐</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>持续创新</h3>
+                    <p>我们不断探索新技术和方法，保持屎山的竞争力。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 内容区块3 -->
+        <div class="content-section">
+            <h2>我们的服务</h2>
+            <p>从概念到实现，我们提供全方位的软件开发服务，帮助您将想法转化为现实。</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>定制开发</h3>
+                    <p>根据您的特定需求，开发完全定制化的软件解决方案。</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>臃肿应用</h3>
+                    <p>开发屎山一样的sb应用，跟shi一样</p>
+                </div>
+                
+    
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 100) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+            
+            // 显示/隐藏回到顶部按钮
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // 无限滚动效果 - 当滚动到页面底部时回到顶部
+            const lastSection = document.getElementById('last-section');
+            const lastSectionPos = lastSection.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (lastSectionPos < windowHeight * 0.2) {
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }, 1000);
+            }
+        });
+        
+        // 点击回到顶部按钮
+        document.getElementById('backToTop').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

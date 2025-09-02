@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们的产品 - Kicoso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-image: url('./bg.png');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: #555;
+            line-height: 1.6;
+            padding-top: 80px;
+            min-height: 100vh;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 250, 245, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 15px 5%;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        header.shrink {
+            padding: 8px 5%;
+            background-color: rgba(255, 253, 252, 0.98);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-text {
+            margin-left: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #ff7eb9;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        header.shrink .logo img {
+            height: 35px;
+        }
+        
+        header.shrink .logo-text {
+            opacity: 0;
+            display: none;
+        }
+        
+        nav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #5a7d9a;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 126, 185, 0.1);
+            color: #ff7eb9;
+        }
+        
+        /* 产品内容区域 */
+        .products-content {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .products-content h1 {
+            text-align: center;
+            color: #ff7eb9;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+        }
+        
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #fef2fb 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #7a9eff;
+        }
+        
+        .product-card h3 {
+            color: #5a7d9a;
+            margin-bottom: 15px;
+        }
+        
+        .product-card p {
+            margin-bottom: 20px;
+            color: #777;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #7a9eff, #38cbd8);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            box-shadow: 0 5px 15px rgba(58, 203, 216, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header id="header">
+        <div class="logo">
+            <img src="./kicoso.png" alt="Kicoso Logo">
+            <span class="logo-text">kicoso</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./about.html">关于</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 产品内容区域 -->
+    <div class="products-content">
+        <h1>我们的产品</h1>
+        
+        <div class="products-container">
+            <div class="product-card">
+                <div class="product-icon">O</div>
+                <h3>OdiyaOS Python Re3</h3>
+                <p>适用于Windows的Python开发环境，集成了最新的工具和库，让Python开发更加高效便捷。</p>
+                <a href="https://www.123865.com/s/pFvgTd-yTgtd" class="download-btn">下载安装程序</a>
+            </div>
+    </div>
+
+    <script>
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kicoso - 创造与编程</title>
+    <title>Kicoso™</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -235,6 +235,48 @@
             visibility: visible;
         }
         
+        /* 底部备案栏样式 */
+        .footer-bar {
+            background-color: #000;
+            color: white;
+            padding: 15px 0;
+            text-align: left;
+            width: 100%;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .github-link:hover {
+            color: #ff7eb9;
+            transform: translateX(5px);
+        }
+        
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            filter: invert(1);
+            transition: all 0.3s ease;
+        }
+        
+        .github-link:hover .github-icon {
+            filter: invert(0.5) sepia(1) saturate(5) hue-rotate(300deg);
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             header {
@@ -364,8 +406,20 @@
                     <h3>臃肿应用</h3>
                     <p>开发屎山一样的sb应用，跟shi一样</p>
                 </div>
-                
-    
+            </div>
+        </div>
+        
+        <!-- 底部备案栏 -->
+        <footer class="footer-bar">
+            <div class="footer-content">
+                <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
+                    <span>源码</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+
     <!-- 回到顶部按钮 -->
     <div class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
@@ -388,20 +442,6 @@
                 backToTop.classList.add('visible');
             } else {
                 backToTop.classList.remove('visible');
-            }
-            
-            // 无限滚动效果 - 当滚动到页面底部时回到顶部
-            const lastSection = document.getElementById('last-section');
-            const lastSectionPos = lastSection.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (lastSectionPos < windowHeight * 0.2) {
-                setTimeout(() => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                    });
-                }, 1000);
             }
         });
         

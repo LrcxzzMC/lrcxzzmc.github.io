@@ -75,19 +75,48 @@
             transition: opacity 0.3s ease;
         }
         
+        /* 滚动时隐藏图片，显示纯文字 Kicoso Studios */
         header.shrink .logo img {
-            height: 35px;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
         }
         
         header.shrink .logo-text {
-            opacity: 0;
+            margin-left: 0;
+            font-size: 22px;
+            opacity: 1;
+            display: inline-block;
+        }
+        
+        /* 默认状态显示 "kicoso"，滚动时文字变为 "Kicoso Studios" */
+        .logo-text-default {
+            display: inline-block;
+        }
+        
+        .logo-text-shrink {
             display: none;
+        }
+        
+        header.shrink .logo-text-default {
+            display: none;
+        }
+        
+        header.shrink .logo-text-shrink {
+            display: inline-block;
+            margin-left: 0;
+            font-size: 22px;
+            font-weight: 600;
+            color: #ff7eb9;
         }
         
         nav {
             flex-grow: 1;
             display: flex;
             justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
         }
         
         nav ul {
@@ -112,6 +141,25 @@
         nav ul li a:hover {
             background-color: rgba(255, 126, 185, 0.1);
             color: #ff7eb9;
+        }
+        
+        /* 协议按钮 */
+        .kol-btn {
+            text-decoration: none;
+            color: #5a7d9a;
+            font-weight: 500;
+            font-size: 18px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid #e0d6d6;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .kol-btn:hover {
+            background-color: rgba(255, 126, 185, 0.1);
+            color: #ff7eb9;
+            border-color: #ff7eb9;
         }
         
         /* 主内容区域 */
@@ -304,12 +352,21 @@
                 font-size: 16px;
             }
             
+            .kol-btn {
+                font-size: 14px;
+                padding: 5px 10px;
+            }
+            
             .gradient-text {
                 font-size: 2.5rem;
             }
             
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            header.shrink .logo-text-shrink {
+                font-size: 16px;
             }
         }
     </style>
@@ -319,13 +376,15 @@
     <header id="header">
         <div class="logo">
             <img src="./kicoso.png" alt="Kicoso Logo">
-            <span class="logo-text">kicoso</span>
+            <span class="logo-text logo-text-default">kicoso</span>
+            <span class="logo-text logo-text-shrink">Kicoso Studios</span>
         </div>
         <nav>
             <ul>
                 <li><a href="./products.html">我们的产品</a></li>
                 <li><a href="./about.html">关于</a></li>
             </ul>
+            <a href="./kol.html" class="kol-btn">📄 协议</a>
         </nav>
     </header>
 
@@ -417,17 +476,17 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 底部备案栏 -->
-        <footer class="footer-bar">
-            <div class="footer-content">
-                <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
-                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
-                    <span>源码</span>
-                </a>
-            </div>
-        </footer>
-    </div>
+    </div> <!-- main-content 闭合 -->
+
+    <!-- 底部备案栏 -->
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
+                <span>源码</span>
+            </a>
+        </div>
+    </footer>
 
     <!-- 回到顶部按钮 -->
     <div class="back-to-top" id="backToTop">

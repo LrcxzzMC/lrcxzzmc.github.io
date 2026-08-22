@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>此界面死了</title>
+    <!-- 微软官网图标 -->
+    <link rel="icon" href="https://www.microsoft.com/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        /* 巨大的 404 */
+        .big-404 {
+            font-size: 180px;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b6b, #ff7eb9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            letter-spacing: 10px;
+            text-shadow: 0 0 60px rgba(255, 107, 107, 0.2);
+        }
+
+        /* 巨大的 💩 */
+        .big-poop {
+            font-size: 160px;
+            line-height: 1.2;
+            display: block;
+            margin-top: -10px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-16px); }
+        }
+
+        .sub-text {
+            font-size: 28px;
+            color: #ccc;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .sub-text-2 {
+            font-size: 20px;
+            color: #888;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== 底部链接 ===== */
+        .footer-links {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #7a9eff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .footer-links a:hover {
+            color: #ff7eb9;
+            background: rgba(255, 126, 185, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .big-404 {
+                font-size: 100px;
+            }
+            .big-poop {
+                font-size: 90px;
+            }
+            .sub-text {
+                font-size: 20px;
+            }
+            .sub-text-2 {
+                font-size: 16px;
+            }
+            .footer-links {
+                gap: 20px;
+            }
+            .footer-links a {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="big-404">404</div>
+        <span class="big-poop">💩</span>
+        <div class="sub-text">你动了屎山项目，该页面死了</div>
+        <div class="sub-text-2">ksc水滴无法为你定位网页</div>
+
+        <!-- ===== 底部链接 ===== -->
+        <div class="footer-links">
+            <a href="./index.html">🏠 回到首页</a>
+            <a href="https://www.bilibili.com/video/BV1GJ411x7h7" target="_blank">❓ 寻求帮助</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,48 +3,177 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kicoso Studios Open Source License (KOL )</title>
+    <title>KOL · Kicoso Studios Open Source License</title>
+    <link rel="icon" href="./webside_icon.png" type="image/png">
     <style>
-        .back-home {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-            transition: 0.3s;
-            z-index: 999;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .back-home:hover {
-            color: #ff7eb9;
-            transform: scale(1.2);
+
+        body {
+            background: #f0ede8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #222;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 880px;
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #d6cec4;
+            border-radius: 12px;
+            padding: 50px 60px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        /* 装饰线 */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c0392b44, #c0392b88, #c0392b44, transparent);
+            border-radius: 2px;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c0392b44, #c0392b88, #c0392b44, transparent);
+            border-radius: 2px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-family: 'Segoe UI', sans-serif;
+            transition: color 0.3s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .back-link:hover {
+            color: #c0392b;
+            border-bottom-color: #c0392b;
+        }
+
+        .header {
+            text-align: center;
+            padding: 10px 0 24px 0;
+            border-bottom: 2px solid #e8e3dc;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            font-family: 'Georgia', serif;
+        }
+
+        .header h1 span {
+            color: #c0392b;
+        }
+
+        .content p {
+            color: #333;
+            font-size: 0.98rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .content p strong {
+            color: #1a1a1a;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #e8e3dc;
+            text-align: center;
+            color: #bbb;
+            font-size: 0.8rem;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .footer a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #c0392b;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+            .header h1 { font-size: 1.3rem; }
+            .content p { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <a href="./index.html" class="back-home" title="返回首页">←</a>
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首页</a>
 
-    <h2>KICOSO STUDIOS OPEN SOURCE LICENSE (KOL)</h2>
+        <div class="header">
+            <h1>KICOSO STUDIOS <span>OPEN SOURCE</span> LICENSE</h1>
+        </div>
 
-    <p><strong>SECTION 1: CREATOR'S COPYRIGHT DECLARATION</strong><br />
-    THIS SECTION IS RESERVED FOR THE CREATOR'S COPYRIGHT DECLARATION. WHEN THE CREATOR ASSERTS COPYRIGHT OWNERSHIP, IT SHALL BE STATED BELOW THIS LINE.</p>
+        <div class="content">
 
-    <p><strong>SECTION 2: OWNERSHIP AND AUTHORSHIP</strong><br />
-    ALL CONTENTS OF OPEN SOURCE PROJECTS, WHETHER INCLUDING AUDIO, IMAGES, CODE, OR ANY OTHER RESOURCES INCORPORATED INTO THE SOURCE CODE, SHALL REMAIN THE SOLE AND EXCLUSIVE PROPERTY OF THE ORIGINAL AUTHOR. KICOSO STUDIOS HOLDS NO RIGHT TO INTERFERE WITH, RESTRICT, OR GOVERN ANY PRODUCT THAT ADOPTS THE KICOSO STUDIOS OPEN SOURCE LICENSE.</p>
+            <p><strong>SECTION 1: CREATOR'S COPYRIGHT DECLARATION</strong><br />
+            THIS SECTION IS RESERVED FOR THE CREATOR'S COPYRIGHT DECLARATION. WHEN THE CREATOR ASSERTS COPYRIGHT OWNERSHIP, IT SHALL BE STATED BELOW THIS LINE.</p>
 
-    <p><strong>SECTION 3: SOURCE CODE DISCLOSURE OBLIGATION</strong><br />
-    ANY PRODUCT USING THIS LICENSE MUST MAKE ITS COMPLETE SOURCE CODE PUBLICLY AVAILABLE. THIS OBLIGATION, HOWEVER, DOES NOT EXTEND TO CODE ORIGINATING FROM CLOSED-SOURCE DEPENDENCIES OR OTHER NECESSARY COMPONENTS THAT ARE NOT PART OF THE PROJECT'S CORE WORK.</p>
+            <p><strong>SECTION 2: OWNERSHIP AND AUTHORSHIP</strong><br />
+            ALL CONTENTS OF OPEN SOURCE PROJECTS, WHETHER INCLUDING AUDIO, IMAGES, CODE, OR ANY OTHER RESOURCES INCORPORATED INTO THE SOURCE CODE, SHALL REMAIN THE SOLE AND EXCLUSIVE PROPERTY OF THE ORIGINAL AUTHOR. KICOSO STUDIOS HOLDS NO RIGHT TO INTERFERE WITH, RESTRICT, OR GOVERN ANY PRODUCT THAT ADOPTS THE KICOSO STUDIOS OPEN SOURCE LICENSE.</p>
 
-    <p><strong>SECTION 4: MODIFICATION AND DERIVATIVE WORKS</strong><br />
-    IF THE CODE IS MODIFIED AND THE MODIFIED VERSION IS RELEASED, THE ORIGINAL AUTHOR MUST BE PROPERLY CREDITED, AND THE MODIFIED SOURCE CODE MUST ALSO BE MADE OPEN SOURCE.</p>
+            <p><strong>SECTION 3: SOURCE CODE DISCLOSURE OBLIGATION</strong><br />
+            ANY PRODUCT USING THIS LICENSE MUST MAKE ITS COMPLETE SOURCE CODE PUBLICLY AVAILABLE. THIS OBLIGATION, HOWEVER, DOES NOT EXTEND TO CODE ORIGINATING FROM CLOSED-SOURCE DEPENDENCIES OR OTHER NECESSARY COMPONENTS THAT ARE NOT PART OF THE PROJECT'S CORE WORK.</p>
 
-    <p><strong>SECTION 5: PUBLICATION PLATFORM AND NOTICE</strong><br />
-    PROJECTS UNDER THIS LICENSE ARE REQUIRED TO PUBLISH THEIR SOURCE CODE ON AN ACCESSIBLE OPEN SOURCE PLATFORM AND INCLUDE THE CORRESPONDING PROJECT LINK WITHIN THE COPYRIGHT STATEMENT SECTION OF THIS LICENSE.</p>
+            <p><strong>SECTION 4: MODIFICATION AND DERIVATIVE WORKS</strong><br />
+            IF THE CODE IS MODIFIED AND THE MODIFIED VERSION IS RELEASED, THE ORIGINAL AUTHOR MUST BE PROPERLY CREDITED, AND THE MODIFIED SOURCE CODE MUST ALSO BE MADE OPEN SOURCE.</p>
 
-    <p><strong>SECTION 6: DISCLAIMER OF LIABILITY FOR UNAUTHORIZED USE</strong><br />
-    KICOSO STUDIOS BEARS NO RESPONSIBILITY FOR ANY UNAUTHORIZED USE, REPRODUCTION, DISTRIBUTION, OR MODIFICATION OF CODE RELEASED UNDER THIS LICENSE BY ANY THIRD PARTY. ANY AND ALL DISPUTES, LEGAL CLAIMS, DAMAGES, OR LIABILITIES ARISING FROM OR RELATED TO SUCH UNAUTHORIZED ACTIVITIES SHALL BE RESOLVED SOLELY BETWEEN THE INVOLVED PARTIES WITHOUT ANY INVOLVEMENT FROM KICOSO STUDIOS. KICOSO STUDIOS PROVIDES NO SUPPORT, WARRANTY, OR GUARANTEE OF ANY KIND REGARDING ANY DISPUTES, PERFORMANCE ISSUES, OR LEGAL CONSEQUENCES ARISING FROM THE USE OF THIS SOFTWARE, UNLESS EXPLICITLY AGREED OTHERWISE IN A SEPARATE WRITTEN AGREEMENT.</p>
+            <p><strong>SECTION 5: PUBLICATION PLATFORM AND NOTICE</strong><br />
+            PROJECTS UNDER THIS LICENSE ARE REQUIRED TO PUBLISH THEIR SOURCE CODE ON AN ACCESSIBLE OPEN SOURCE PLATFORM AND INCLUDE THE CORRESPONDING PROJECT LINK WITHIN THE COPYRIGHT STATEMENT SECTION OF THIS LICENSE.</p>
+
+            <p><strong>SECTION 6: DISCLAIMER OF LIABILITY FOR UNAUTHORIZED USE</strong><br />
+            KICOSO STUDIOS BEARS NO RESPONSIBILITY FOR ANY UNAUTHORIZED USE, REPRODUCTION, DISTRIBUTION, OR MODIFICATION OF CODE RELEASED UNDER THIS LICENSE BY ANY THIRD PARTY. ANY AND ALL DISPUTES, LEGAL CLAIMS, DAMAGES, OR LIABILITIES ARISING FROM OR RELATED TO SUCH UNAUTHORIZED ACTIVITIES SHALL BE RESOLVED SOLELY BETWEEN THE INVOLVED PARTIES WITHOUT ANY INVOLVEMENT FROM KICOSO STUDIOS. KICOSO STUDIOS PROVIDES NO SUPPORT, WARRANTY, OR GUARANTEE OF ANY KIND REGARDING ANY DISPUTES, PERFORMANCE ISSUES, OR LEGAL CONSEQUENCES ARISING FROM THE USE OF THIS SOFTWARE, UNLESS EXPLICITLY AGREED OTHERWISE IN A SEPARATE WRITTEN AGREEMENT.</p>
+
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank">[ 源码 ]</a>
+        </div>
+    </div>
 
 </body>
 </html>

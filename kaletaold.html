@@ -1,14 +1,215 @@
 <!DOCTYPE html>
-<html lang="ZH_CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="森罗物语老牌酒馆：版本列表" content="width=device-width, initial-scale=1.0">
-    <title>森罗物语老牌酒馆：版本列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>森罗附属-老牌酒馆</title>
+    <link rel="icon" href="./webside_icon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('./font.ttf') format('truetype');
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            image-rendering: pixelated;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(0deg, #3d3d3d 1px, transparent 1px),
+                linear-gradient(90deg, #3d3d3d 1px, transparent 1px);
+            background-size: 16px 16px;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 740px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 0 20px 0;
+            border-bottom: 4px solid #b88a4a;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '✦ ✧ ✦ ✧ ✦';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            padding: 0 16px;
+            color: #b88a4a;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #f0d8a0;
+            text-shadow: 3px 3px 0 #3d3d3d;
+            letter-spacing: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .header .sub {
+            color: #8a8a8a;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            margin-top: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #b8a070;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            border: 2px solid #5a4a3a;
+            padding: 4px 16px;
+            image-rendering: pixelated;
+        }
+
+        .back-link:hover {
+            color: #f0d8a0;
+            border-color: #b88a4a;
+        }
+
+        .version-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            margin-bottom: 6px;
+            border: 3px solid #3d3d3d;
+            background: rgba(40,40,40,0.4);
+            transition: all 0.15s;
+            image-rendering: pixelated;
+        }
+
+        .version-item:hover {
+            border-color: #b88a4a;
+            background: rgba(60,50,40,0.3);
+            transform: translateX(4px);
+        }
+
+        .version-item .name {
+            color: #e8e0d0;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .version-item .name .ver {
+            color: #f0d8a0;
+            font-weight: 400;
+        }
+
+        .version-item .download-link {
+            color: #b8a070;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 4px 16px;
+            border: 2px solid #5a4a3a;
+            transition: all 0.15s;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            image-rendering: pixelated;
+        }
+
+        .version-item .download-link:hover {
+            border-color: #b88a4a;
+            color: #f0d8a0;
+            background: rgba(184,138,74,0.06);
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px solid #3d3d3d;
+            text-align: center;
+            color: #5a5a5a;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .footer a {
+            color: #8a7a5a;
+            text-decoration: none;
+            transition: color 0.3s;
+            border: 2px solid #3d3d3d;
+            padding: 2px 14px;
+        }
+
+        .footer a:hover {
+            color: #f0d8a0;
+            border-color: #b88a4a;
+        }
+
+        @media (max-width: 600px) {
+            .version-item {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+                text-align: center;
+            }
+            .header h1 { font-size: 1.5rem; letter-spacing: 2px; }
+            .version-item .name { font-size: 0.85rem; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Index\kaletaold</h1>
-    <a href="https://cdn.gh-proxy.org/https://github.com/LrcxzzMC/Kaleidoscope-Old-Tavern/releases/download/Rel/kaletaold-1.0.0.jar">kaletaold\1.0.0</a>
-    <br>
-    <a href="https://gh-proxy.org/https://github.com/LrcxzzMC/Kaleidoscope-Old-Tavern/releases/download/Rel1.1.0/kaletaold-1.1.0.jar">kaletaold\1.1.0</a>
+
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首页</a>
+
+        <div class="header">
+            <h1>🍶 森罗附属-老牌酒馆</h1>
+            <div class="sub">// 版本清单</div>
+        </div>
+
+        <div class="version-item">
+            <span class="name"><span class="ver">kaletaold 1.0.0</span>  ·  初始酿造</span>
+            <a href="https://cdn.gh-proxy.org/https://github.com/LrcxzzMC/Kaleidoscope-Old-Tavern/releases/download/Rel/kaletaold-1.0.0.jar" class="download-link">▸ 取酒</a>
+        </div>
+        <div class="version-item">
+            <span class="name"><span class="ver">kaletaold 1.1.0</span>  ·  陈酿升级</span>
+            <a href="https://gh-proxy.org/https://github.com/LrcxzzMC/Kaleidoscope-Old-Tavern/releases/download/Rel1.1.0/kaletaold-1.1.0.jar" class="download-link">▸ 取酒</a>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank">[ 源码 ]</a>
+        </div>
+    </div>
+
 </body>
 </html>

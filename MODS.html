@@ -1,16 +1,223 @@
 <!DOCTYPE html>
-<html lang="ZH_CN">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我们的模组 - Kicoso</title>
+    <title>模组列表 · Kicoso</title>
+    <link rel="icon" href="./webside_icon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('./font.ttf') format('truetype');
+        }
+
+        body {
+            background: #2d2d2d;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            image-rendering: pixelated;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(45deg, #6b8c42 2px, transparent 2px),
+                linear-gradient(-45deg, #6b8c42 2px, transparent 2px),
+                linear-gradient(0deg, #8b6b42 1px, transparent 1px);
+            background-size: 32px 32px, 32px 32px, 16px 16px;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 780px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 0 20px 0;
+            border-bottom: 4px solid #6b8c42;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .header::after {
+            content: '◆ ◇ ◆ ◇ ◆';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2d2d2d;
+            padding: 0 16px;
+            color: #8ab84a;
+            font-size: 0.7rem;
+            letter-spacing: 6px;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: #c8e8a0;
+            text-shadow: 3px 3px 0 #3d3d3d;
+            letter-spacing: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .header .sub {
+            color: #a0a0a0;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            margin-top: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #a0c880;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            border: 2px solid #4a6a3a;
+            padding: 4px 16px;
+            image-rendering: pixelated;
+        }
+
+        .back-link:hover {
+            color: #c8e8a0;
+            border-color: #8ab84a;
+        }
+
+        .mod-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            margin-bottom: 6px;
+            border: 3px solid #4a4a4a;
+            background: rgba(60,60,60,0.4);
+            transition: all 0.15s;
+            image-rendering: pixelated;
+        }
+
+        .mod-item:hover {
+            border-color: #8ab84a;
+            background: rgba(80,80,80,0.4);
+            transform: translateX(4px);
+        }
+
+        .mod-item .name {
+            color: #e8e8e8;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .mod-item .name .tag {
+            color: #a0c880;
+            font-size: 0.6rem;
+            margin-left: 8px;
+            border: 1px solid #4a6a3a;
+            padding: 1px 8px;
+        }
+
+        .mod-item .download-link {
+            color: #a0c880;
+            text-decoration: none;
+            font-size: 0.8rem;
+            padding: 4px 16px;
+            border: 2px solid #4a6a3a;
+            transition: all 0.15s;
+            font-family: 'PixelFont', 'Courier New', monospace;
+            image-rendering: pixelated;
+        }
+
+        .mod-item .download-link:hover {
+            border-color: #8ab84a;
+            color: #c8e8a0;
+            background: rgba(107,140,66,0.08);
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px solid #4a4a4a;
+            text-align: center;
+            color: #6a6a6a;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            font-family: 'PixelFont', 'Courier New', monospace;
+        }
+
+        .footer a {
+            color: #6a8a5a;
+            text-decoration: none;
+            transition: color 0.3s;
+            border: 2px solid #4a4a4a;
+            padding: 2px 14px;
+        }
+
+        .footer a:hover {
+            color: #c8e8a0;
+            border-color: #8ab84a;
+        }
+
+        @media (max-width: 600px) {
+            .mod-item {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+                text-align: center;
+            }
+            .header h1 { font-size: 1.6rem; letter-spacing: 2px; }
+            .mod-item .name { font-size: 0.85rem; }
+        }
+    </style>
 </head>
-<body>  
-    <h1>Index of mods\</h1>
-    <a href="https://bbsmc.net/mod/wwii-items">WWIII-二战物品模组</a>
-    <br>
-    <a href="kaletaold.html">森罗酒馆：老牌酒馆-版本列表</a>
-    <br>
-    <a href="https://api.gitproxy.dev/github.com/LrcxzzMC/Fcr/releases/download/Release1.0.0/free_creates_railway.jar">机械动力：轨道无限制</a>
+<body>
+
+    <div class="container">
+        <a href="./index.html" class="back-link">← 返回首页</a>
+
+        <div class="header">
+            <h1>◆ MODS</h1>
+            <div class="sub">// Kicoso 模组仓库</div>
+        </div>
+
+        <div class="mod-item">
+            <span class="name">WWIII-二战物品模组 <span class="tag">模组</span></span>
+            <a href="https://bbsmc.net/mod/wwii-items" class="download-link">▸ 查看</a>
+        </div>
+        <div class="mod-item">
+            <span class="name">森罗附属-老牌酒馆 <span class="tag">版本列表</span></span>
+            <a href="kaletaold.html" class="download-link">▸ 进入</a>
+        </div>
+        <div class="mod-item">
+            <span class="name">机械动力 · 轨道无限制 <span class="tag">模组</span></span>
+            <a href="https://api.gitproxy.dev/github.com/LrcxzzMC/Fcr/releases/download/Release1.0.0/free_creates_railway.jar" class="download-link">▸ 下载</a>
+        </div>
+
+        <div class="footer">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank">[ 源码 ]</a>
+        </div>
+    </div>
+
 </body>
 </html>

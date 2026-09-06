@@ -6,11 +6,7 @@
     <title>KOL · Kicoso Studios Open Source License</title>
     <link rel="icon" href="./webside_icon.png" type="image/png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background: #f0ede8;
@@ -35,7 +31,6 @@
             position: relative;
         }
 
-        /* 装饰线 */
         .container::before {
             content: '';
             position: absolute;
@@ -76,10 +71,14 @@
         }
 
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 10px 0 24px 0;
             border-bottom: 2px solid #e8e3dc;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .header h1 {
@@ -88,10 +87,52 @@
             color: #1a1a1a;
             letter-spacing: 1px;
             font-family: 'Georgia', serif;
+            flex: 1;
         }
 
         .header h1 span {
             color: #c0392b;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border: 1px solid #d6cec4;
+            border-radius: 6px;
+            background: #faf8f6;
+            color: #444;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-weight: 500;
+        }
+
+        .download-btn:hover {
+            border-color: #c0392b;
+            color: #c0392b;
+            background: #fdf6f5;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 12px rgba(192, 57, 43, 0.06);
+        }
+
+        .download-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .content p {
@@ -131,10 +172,11 @@
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 30px 20px;
-            }
+            .container { padding: 30px 20px; }
             .header h1 { font-size: 1.3rem; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .download-buttons { width: 100%; }
+            .download-btn { flex: 1; justify-content: center; }
             .content p { font-size: 0.9rem; }
         }
     </style>
@@ -146,10 +188,20 @@
 
         <div class="header">
             <h1>KICOSO STUDIOS <span>OPEN SOURCE</span> LICENSE</h1>
+
+            <div class="download-buttons">
+                <button class="download-btn" onclick="downloadFile('./kol.txt', 'KOL.txt')">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    .txt
+                </button>
+                <button class="download-btn" onclick="downloadFile('./kol.md', 'KOL.md')">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    .md
+                </button>
+            </div>
         </div>
 
         <div class="content">
-
             <p><strong>SECTION 1: CREATOR'S COPYRIGHT DECLARATION</strong><br />
             THIS SECTION IS RESERVED FOR THE CREATOR'S COPYRIGHT DECLARATION. WHEN THE CREATOR ASSERTS COPYRIGHT OWNERSHIP, IT SHALL BE STATED BELOW THIS LINE.</p>
 
@@ -167,13 +219,29 @@
 
             <p><strong>SECTION 6: DISCLAIMER OF LIABILITY FOR UNAUTHORIZED USE</strong><br />
             KICOSO STUDIOS BEARS NO RESPONSIBILITY FOR ANY UNAUTHORIZED USE, REPRODUCTION, DISTRIBUTION, OR MODIFICATION OF CODE RELEASED UNDER THIS LICENSE BY ANY THIRD PARTY. ANY AND ALL DISPUTES, LEGAL CLAIMS, DAMAGES, OR LIABILITIES ARISING FROM OR RELATED TO SUCH UNAUTHORIZED ACTIVITIES SHALL BE RESOLVED SOLELY BETWEEN THE INVOLVED PARTIES WITHOUT ANY INVOLVEMENT FROM KICOSO STUDIOS. KICOSO STUDIOS PROVIDES NO SUPPORT, WARRANTY, OR GUARANTEE OF ANY KIND REGARDING ANY DISPUTES, PERFORMANCE ISSUES, OR LEGAL CONSEQUENCES ARISING FROM THE USE OF THIS SOFTWARE, UNLESS EXPLICITLY AGREED OTHERWISE IN A SEPARATE WRITTEN AGREEMENT.</p>
-
         </div>
 
         <div class="footer">
             <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank">[ 源码 ]</a>
         </div>
     </div>
+
+    <script>
+        function downloadFile(url, filename) {
+            fetch(url)
+                .then(res => res.text())
+                .then(content => {
+                    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(link.href);
+                });
+        }
+    </script>
 
 </body>
 </html>

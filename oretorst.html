@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矿经缘 · 下载</title>
+    <link rel="icon" href="./webside_icon.png" type="image/png">
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('./font.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'CustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #120e0a;
+            color: #d8c8a8;
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image:
+                radial-gradient(circle at 15% 25%, rgba(200, 160, 80, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(100, 180, 160, 0.04) 0%, transparent 40%),
+                linear-gradient(0deg, #1a1410 1px, transparent 1px),
+                linear-gradient(90deg, #1a1410 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            pointer-events: none;
+        }
+
+        .back-float {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: rgba(20, 16, 12, 0.85);
+            border: 2px solid #4a3820;
+            color: #c8a050;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .back-float:hover {
+            border-color: #c8a050;
+            background: rgba(28, 22, 16, 0.95);
+            transform: translateX(-4px);
+        }
+
+        .page {
+            max-width: 600px;
+            width: 100%;
+            margin-top: 60px;
+        }
+
+        .title-area {
+            text-align: center;
+            padding: 30px 20px 26px;
+            border-bottom: 2px solid #6b5030;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .title-area::after {
+            content: '⛏ ⛏ ⛏';
+            position: absolute;
+            bottom: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #120e0a;
+            padding: 0 18px;
+            color: #6b5030;
+            font-size: 0.85rem;
+            letter-spacing: 10px;
+        }
+
+        .title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #c8a050;
+            letter-spacing: 10px;
+            margin-bottom: 8px;
+            text-shadow: 0 0 50px rgba(200, 160, 80, 0.08);
+        }
+
+        .subtitle {
+            color: #8a7a5a;
+            font-size: 0.95rem;
+            letter-spacing: 6px;
+        }
+
+        .download-zone {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .download-btn {
+            display: block;
+            text-align: center;
+            padding: 22px;
+            background: rgba(28, 22, 16, 0.7);
+            border: 2px solid #c8a050;
+            color: #c8a050;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #c8a050;
+            color: #1a1410;
+            box-shadow: 0 0 50px rgba(200, 160, 80, 0.2);
+        }
+
+        .download-btn.backup {
+            border-color: #4a3820;
+            color: #9a8a6a;
+        }
+
+        .download-btn.backup:hover {
+            background: #6b5030;
+            color: #1a1410;
+            box-shadow: 0 0 50px rgba(107, 80, 48, 0.2);
+        }
+
+        .float-ore {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.025;
+            font-size: 160px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .float-ore-1 { top: 10%; right: 5%; transform: rotate(15deg); }
+        .float-ore-2 { bottom: 15%; left: 4%; transform: rotate(-20deg); }
+        .float-ore-3 { top: 55%; right: 10%; transform: rotate(40deg); }
+
+        .footer-text {
+            text-align: center;
+            color: #4a3820;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+            .back-float {
+                top: 16px;
+                left: 16px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+
+            .title {
+                font-size: 2rem;
+                letter-spacing: 6px;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+                letter-spacing: 4px;
+            }
+
+            .download-btn {
+                padding: 18px;
+                font-size: 0.95rem;
+                letter-spacing: 2px;
+            }
+
+            .float-ore {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="./products.html" class="back-float">← 返回产品</a>
+
+    <div class="float-ore float-ore-1">⛏️</div>
+    <div class="float-ore float-ore-2">💎</div>
+    <div class="float-ore float-ore-3">🪨</div>
+
+    <div class="page">
+
+        <div class="title-area">
+            <div class="title">⛏ 矿经缘</div>
+            <div class="subtitle">O R E T O R S T</div>
+        </div>
+
+        <div class="download-zone">
+            <a href="https://api.gitproxy.dev/github.com/LrcxzzMC/ksc-cangku/releases/download/b/setup.exe" class="download-btn" target="_blank" rel="noopener">⛏ 主下载链接</a>
+            <a href="https://github.com/LrcxzzMC/ksc-cangku/releases/download/b/setup.exe" class="download-btn backup" target="_blank" rel="noopener">🪨 备用下载链接</a>
+        </div>
+
+        <div class="footer-text">KICOSO STUDIOS · 2026</div>
+
+    </div>
+
+</body>
+</html>

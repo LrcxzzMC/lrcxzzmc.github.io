@@ -1,67 +1,63 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>万联世界 · 版本列表</title>
-    <link rel="icon" href="./webside_icon.png" type="image/png">
+    <link rel="icon" href="./website_icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./theme.css">
+    <script>
+        // 主题初始化：优先读记忆，默认浅色（放在 head 里避免闪烁）
+        (function () {
+            var saved = localStorage.getItem('kicoso-theme');
+            document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
+        })();
+    </script>
     <style>
+        /* 本页专属：万联世界版本档案（等宽字体 + 主题令牌配色） */
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #0a0a12;
             font-family: 'Courier New', monospace;
-            min-height: 100vh;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .container {
+        .wwl-container {
             max-width: 820px;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--panel-bg);
+            border: var(--panel-border);
+            border-radius: var(--radius-panel);
+            box-shadow: var(--panel-shadow);
         }
 
-        .header {
+        .wwl-header {
             text-align: center;
-            padding: 30px 0 10px 0;
-            border-bottom: 2px solid #00ffcc;
+            padding: 20px 0 10px;
+            border-bottom: var(--section-border);
             margin-bottom: 30px;
         }
 
-        .header h1 {
-            font-size: 2.2rem;
+        .wwl-header h1 {
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(90deg, #00ffcc, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--h1-color);
             letter-spacing: 4px;
         }
 
-        .header .sub {
-            color: #8888aa;
+        .wwl-header h1 span {
+            color: var(--h1-span);
+        }
+
+        html[data-theme="dark"] .wwl-header h1 span {
+            color: var(--accent-a);
+        }
+
+        .wwl-header .sub {
+            color: var(--muted);
             font-size: 0.85rem;
             letter-spacing: 6px;
             margin-top: 4px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #8888aa;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-            letter-spacing: 2px;
-        }
-
-        .back-link:hover {
-            color: #00ffcc;
         }
 
         .version-item {
@@ -70,66 +66,68 @@
             justify-content: space-between;
             padding: 16px 22px;
             margin-bottom: 10px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-left: 3px solid #a855f7;
-            transition: all 0.3s;
-            border-radius: 4px;
+            background: var(--card-bg);
+            border: var(--card-border);
+            border-radius: var(--radius-card);
+            transition: all 0.3s ease;
         }
 
         .version-item:hover {
-            background: rgba(255,255,255,0.06);
-            border-left-color: #00ffcc;
+            background: var(--card-hover-bg);
             transform: translateX(6px);
         }
 
+        html:not([data-theme="dark"]) .version-item:nth-child(3n+1):hover {
+            border-color: var(--accent);
+        }
+
+        html:not([data-theme="dark"]) .version-item:nth-child(3n+2):hover {
+            border-color: var(--accent-orange);
+        }
+
+        html:not([data-theme="dark"]) .version-item:nth-child(3n):hover {
+            border-color: var(--accent-green);
+        }
+
+        html[data-theme="dark"] .version-item:hover {
+            border-color: #ffffff;
+        }
+
         .version-item .name {
-            color: #d0d0e0;
+            color: var(--text);
             font-size: 0.95rem;
-            font-weight: 400;
             letter-spacing: 1px;
         }
 
         .version-item .name .ver {
-            color: #a855f7;
+            color: var(--accent);
             font-weight: 600;
         }
 
+        html[data-theme="dark"] .version-item .name .ver {
+            color: var(--accent-b);
+        }
+
         .version-item .download-link {
-            color: #8888aa;
+            color: var(--btn-color);
             text-decoration: none;
             font-size: 0.8rem;
             padding: 5px 18px;
-            border: 1px solid #333355;
-            border-radius: 4px;
-            transition: all 0.3s;
+            border: 1px solid var(--btn-border);
+            border-radius: var(--radius-pill);
+            transition: all 0.3s ease;
             letter-spacing: 2px;
+            white-space: nowrap;
         }
 
         .version-item .download-link:hover {
-            border-color: #00ffcc;
-            color: #00ffcc;
-            background: rgba(0,255,204,0.04);
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
-        .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            text-align: center;
-            color: #555577;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-        }
-
-        .footer a {
-            color: #555577;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: #a855f7;
+        html[data-theme="dark"] .version-item .download-link:hover {
+            border-color: var(--accent-a);
+            color: var(--accent-a);
         }
 
         @media (max-width: 600px) {
@@ -139,52 +137,105 @@
                 align-items: stretch;
                 text-align: center;
             }
-            .header h1 { font-size: 1.5rem; }
+            .wwl-header h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <a href="./index.html" class="back-link">← 返回首页</a>
+    <header id="header">
+        <div class="logo">
+            <img src="./kicoso.png" alt="Kicoso Logo">
+            <span class="logo-text logo-text-default">kicoso</span>
+            <span class="logo-text logo-text-shrink">Kicoso Studios</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./products.html">我们的产品</a></li>
+            </ul>
+            <a href="#" id="themeToggle" class="btn theme-btn">
+                <span class="t-dark"><i class="fas fa-moon"></i> 深色</span>
+                <span class="t-light"><i class="fas fa-sun"></i> 浅色</span>
+            </a>
+        </nav>
+    </header>
 
-        <div class="header">
-            <h1>⚡ WABLIAN WORLD</h1>
+    <div class="wwl-container">
+        <div class="wwl-header">
+            <h1><span>WABLIAN WORLD</span></h1>
             <div class="sub">// 万联世界 · 版本档案</div>
         </div>
 
         <div class="version-item">
             <span class="name"><span class="ver">ALPHA</span>  ·  最初之章</span>
-            <a href="https://www.123865.com/s/pFvgTd-kbgtd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-kbgtd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">0.2</span>  ·  稳定版（也许）</span>
-            <a href="https://www.123865.com/s/pFvgTd-NVgtd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-NVgtd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">0.7</span>  ·  高级版 · 任务系统</span>
-            <a href="https://www.123865.com/s/pFvgTd-fAFtd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-fAFtd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">1.07</span>  ·  bug修复 · 抽象加载画面</span>
-            <a href="https://www.123865.com/s/pFvgTd-tEFtd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-tEFtd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">1.9</span>  ·  迭代里程碑</span>
-            <a href="https://cdn.bbsmc.net/bbsmc/data/KsXOljsN/versions/a1G7cT6n/WWLMC-1.9.zip" class="download-link">▸ 获取</a>
+            <a href="https://cdn.bbsmc.net/bbsmc/data/KsXOljsN/versions/a1G7cT6n/WWLMC-1.9.zip" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">1.98</span>  ·  接近完美</span>
-            <a href="https://www.123865.com/s/pFvgTd-NCFtd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-NCFtd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">2.2.1</span>  ·  bug修复</span>
-            <a href="https://www.123865.com/s/pFvgTd-53Ytd" class="download-link">▸ 获取</a>
+            <a href="https://www.123865.com/s/pFvgTd-53Ytd" class="download-link">获取</a>
         </div>
         <div class="version-item">
             <span class="name"><span class="ver">26.1.0</span>  ·  二六点十</span>
-            <a href="https://cdn.bbsmc.net/bbsmc/data/KsXOljsN/versions/9WIjtqGT/WWLMC26.1.0.mrpack" class="download-link">▸ 获取</a>
+            <a href="https://cdn.bbsmc.net/bbsmc/data/KsXOljsN/versions/9WIjtqGT/WWLMC26.1.0.mrpack" class="download-link">获取</a>
         </div>
+    </div>
+
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
+                <span>源码</span>
+            </a>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 主题切换：只翻转 data-theme，样式全在 theme.css 里
+        document.getElementById('themeToggle').addEventListener('click', function (e) {
+            e.preventDefault();
+            var root = document.documentElement;
+            var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('kicoso-theme', next);
+        });
+
+        // 滚动：顶栏收缩 + 回到顶部
+        window.addEventListener('scroll', function () {
+            var header = document.getElementById('header');
+            var backToTop = document.getElementById('backToTop');
+            header.classList.toggle('shrink', window.scrollY > 80);
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 
 </body>
 </html>

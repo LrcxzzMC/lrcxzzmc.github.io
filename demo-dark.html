@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kicoso 统一风格示例（深色）</title>
+    <link rel="icon" href="./website_icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./theme.css">
+    <script>
+        // 主题初始化：优先读记忆，本文件默认深色（放在 head 里避免闪烁）
+        (function () {
+            var saved = localStorage.getItem('kicoso-theme');
+            document.documentElement.dataset.theme = saved === 'light' ? 'light' : 'dark';
+        })();
+    </script>
+</head>
+<body>
+
+    <header id="header">
+        <div class="logo">
+            <img src="./kicoso.png" alt="Kicoso Logo">
+            <span class="logo-text logo-text-default">kicoso</span>
+            <span class="logo-text logo-text-shrink">Kicoso Studios</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./products.html">我们的产品</a></li>
+                <li><a href="./about.html">关于</a></li>
+            </ul>
+            <a href="./kol.html" class="btn kol-btn">📄 协议</a>
+            <a href="#" id="themeToggle" class="btn theme-btn">
+                <span class="t-dark"><i class="fas fa-moon"></i> 深色</span>
+                <span class="t-light"><i class="fas fa-sun"></i> 浅色</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- 首页示例：面板 > 区块 > 卡片，图标直接用 <i>，不再套 div -->
+    <div class="main-content">
+        <div class="gradient-text">Create, and programming!</div>
+
+        <div class="content-section">
+            <h2>欢迎来到 <span>Kicoso</span></h2>
+            <p>我们致力于创造屎山一样的编程解决方案，让技术变成赤石。</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-lightbulb"></i>
+                    <h3>创新设计</h3>
+                    <p>我们不断探索新的设计理念，为编程师造成更大压力</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-code"></i>
+                    <h3>屎山代码</h3>
+                    <p>不用多说</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-users"></i>
+                    <h3>屎山至上</h3>
+                    <p>屎山不知不觉中出现了</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>我们的理念</h2>
+            <p>我们没有任何理念</p>
+            <p>你看啥</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-palette"></i>
+                    <h3>屎山与臃肿</h3>
+                    <p>无需多盐</p>
+                </div>
+                <div class="feature-card">
+                    <i class="feature-icon fas fa-rocket"></i>
+                    <h3>持续创新</h3>
+                    <p>我们不断探索新技术和方法，保持屎山的竞争力。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 产品页示例：顶层面板 + 网格，两层 -->
+    <div class="products-content">
+        <h1>我们的 <span>产品</span></h1>
+        <div class="products-container">
+            <div class="product-card">
+                <span class="product-icon">⛏️</span>
+                <h3>示例产品 A</h3>
+                <p>产品一句话介绍</p>
+                <a href="#" class="download-btn">下载</a>
+            </div>
+            <div class="product-card">
+                <span class="product-icon">🎮️</span>
+                <h3>示例产品 B</h3>
+                <p>产品一句话介绍</p>
+                <a href="#" class="download-btn">下载</a>
+            </div>
+            <div class="product-card">
+                <span class="product-icon">🧱</span>
+                <h3>示例产品 C</h3>
+                <p>产品一句话介绍</p>
+                <a href="#" class="download-btn">下载</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关于页示例：顶层面板 + 团队网格，两层 -->
+    <div class="about-content">
+        <div class="team-section">
+            <h2>我们的 <span>团队</span></h2>
+            <div class="team-container">
+                <div class="team-member">
+                    <div class="member-avatar">LSS</div>
+                    <h4>LrcxzzMC</h4>
+                    <p>创始人&喜欢赤石的编程师</p>
+                    <a href="https://space.bilibili.com/3546644670843357">b站主页</a>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">WYZ</div>
+                    <h4>SYSTEM-WIN-WYZ</h4>
+                    <p>Hack NET X工作室创始人(合作中)</p>
+                    <a href="https://hacknetx.pgrm.run">Hack NET X工作室官网</a>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar">W</div>
+                    <h4>梧桐</h4>
+                    <p>临时美术师&摸鱼大神</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
+                <span>源码</span>
+            </a>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 主题切换：只翻转 data-theme，样式全在 theme.css 里
+        document.getElementById('themeToggle').addEventListener('click', function (e) {
+            e.preventDefault();
+            var root = document.documentElement;
+            var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('kicoso-theme', next);
+        });
+
+        // 滚动：顶栏收缩 + 回到顶部
+        window.addEventListener('scroll', function () {
+            var header = document.getElementById('header');
+            var backToTop = document.getElementById('backToTop');
+            header.classList.toggle('shrink', window.scrollY > 80);
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>

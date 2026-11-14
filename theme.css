@@ -1,0 +1,1225 @@
+/* ======================================================================
+   Kicoso 全站统一主题样式表
+   所有页面只引用这一个 CSS，深浅色靠 <html data-theme="light|dark"> 切换。
+   两个主题各自一套设计理念，只统一结构与组件：
+   - 浅色（:root）        品牌粉/蓝/青 + bg.png + 白纱面板 + 大圆角柔和阴影
+   - 深色（data-theme="dark")  保持现有 _d 页面样式，颜色一律不动
+   改全局样式只需要改这一个文件。
+   ====================================================================== */
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'CustomFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ------------------------------------------------------------------
+   1. 主题令牌
+   ------------------------------------------------------------------ */
+:root {
+    /* 画布：纯白 */
+    --page-bg: #ffffff;
+    --page-bg-image: none;
+    --grid: none;
+
+    /* 文字：黑白灰阶，高对比 */
+    --text: #1a1a1a;
+    --text-strong: #000000;
+    --muted: #595959;
+
+    /* 强调色：蓝主色 + 绿/橙/红点缀（均纯色，不用渐变） */
+    --accent: #2563eb;
+    --accent-deep: #1d4ed8;
+    --accent-green: #16a34a;
+    --accent-green-deep: #15803d;
+    --accent-orange: #ea580c;
+    --accent-red: #dc2626;
+
+    /* 面与描边：容器默认细灰线，悬停才显现强调色；顶层面板/下载按钮/回顶钮保留黑色常显描边 */
+    --panel-bg: #ffffff;
+    --panel-border: 2px solid #111111;
+    --panel-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --section-bg: #fafafa;
+    --section-border: 1px solid #d9d9d9;
+    --section-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --section-hover-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --card-bg: #ffffff;
+    --card-border: 1px solid #d9d9d9;
+    --card-hover-bg: #f2f2f2;
+    --card-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    /* 形状（浅色常规圆角 / 深色直角） */
+    --radius-panel: 16px;
+    --radius-card: 12px;
+    --radius-pill: 10px;
+
+    /* 顶栏 */
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --header-bg-shrink: rgba(255, 255, 255, 0.98);
+    --header-border: 1px solid #d9d9d9;
+    --header-border-shrink: #2563eb;
+    --header-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+    --logo-color: #000000;
+    --logo-shrink-color: #ea580c;
+    --nav-color: #333333;
+    --nav-hover-color: #2563eb;
+    --nav-hover-bg: rgba(37, 99, 235, 0.08);
+    --nav-hover-border: #2563eb;
+
+    /* 按钮 */
+    --btn-bg: #ffffff;
+    --btn-border: #d9d9d9;
+    --btn-color: #1a1a1a;
+    --btn-hover-bg: rgba(37, 99, 235, 0.08);
+    --kol-hover: #dc2626;
+    --theme-hover: #2563eb;
+
+    /* 标题：黑字 + 蓝色点缀 */
+    --hero-grad: #000000;
+    --h1-color: #000000;
+    --h1-span: #2563eb;
+    --h2-color: #000000;
+    --h2-span: #2563eb;
+    --h3-color: #111111;
+    --icon-color: #2563eb;
+
+    /* 产品下载按钮：绿底黑框 */
+    --dl-bg: #16a34a;
+    --dl-color: #ffffff;
+    --dl-border: 2px solid #111111;
+    --dl-radius: 10px;
+    --dl-hover-bg: #15803d;
+    --dl-hover-color: #ffffff;
+    --dl-hover-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+
+    /* 头像 / 团队链接 */
+    --avatar-grad: #2563eb;
+    --avatar-color: #ffffff;
+    --member-link: #2563eb;
+    --member-link-hover: #1d4ed8;
+    --member-link-border: #d9d9d9;
+    --member-link-padding: 4px 14px;
+
+    /* 回到顶部：蓝底黑框 */
+    --b2t-bg: #2563eb;
+    --b2t-color: #ffffff;
+    --b2t-border: 2px solid #111111;
+    --b2t-radius: 50%;
+    --b2t-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --b2t-hover-border: #111111;
+    --b2t-hover-color: #ffffff;
+
+    /* GitHub 页脚链接 */
+    --gh-color: #9ca3af;
+    --gh-hover: #ffffff;
+    --gh-border: rgba(255, 255, 255, 0.25);
+    --gh-hover-border: #ffffff;
+}
+
+html[data-theme="dark"] {
+    /* 画布 */
+    --page-bg: #000000;
+    --page-bg-image: none;
+    --grid: block;
+
+    /* 文字 */
+    --text: #ffffff;
+    --text-strong: #ffffff;
+    --muted: #888888;
+
+    /* 深色强调色（与原 _d 页面一致） */
+    --accent-a: #ffaa33;
+    --accent-b: #3388ff;
+    --accent-c: #00ffaa;
+
+    /* 面与描边 */
+    --panel-bg: #0a0a0a;
+    --panel-border: 2px solid #ffffff;
+    --panel-shadow: 0 0 60px rgba(255, 255, 255, 0.02);
+    --section-bg: #0d0d0d;
+    --section-border: 2px solid #333333;
+    --section-shadow: none;
+    --section-hover-shadow: 0 0 40px rgba(255, 255, 255, 0.02);
+    --card-bg: #0a0a0a;
+    --card-border: 2px solid #333333;
+    --card-hover-bg: #111111;
+    --card-hover-shadow: none;
+
+    /* 形状：直角 */
+    --radius-panel: 0;
+    --radius-card: 0;
+    --radius-pill: 0;
+
+    /* 顶栏 */
+    --header-bg: #000000;
+    --header-bg-shrink: #000000;
+    --header-border: 2px solid #ffffff;
+    --header-border-shrink: #ffaa33;
+    --header-shadow: none;
+    --logo-color: #ffffff;
+    --logo-shrink-color: #ffaa33;
+    --nav-color: #999999;
+    --nav-hover-color: #ffffff;
+    --nav-hover-bg: rgba(255, 255, 255, 0.02);
+    --nav-hover-border: rgba(255, 255, 255, 0.15);
+
+    /* 按钮 */
+    --btn-bg: transparent;
+    --btn-border: rgba(255, 255, 255, 0.15);
+    --btn-color: #999999;
+    --btn-hover-bg: rgba(255, 255, 255, 0.02);
+    --kol-hover: #ffaa33;
+    --theme-hover: #3388ff;
+
+    /* 标题渐变 */
+    --hero-grad: linear-gradient(135deg, #ffffff, #ffaa33, #3388ff, #ffffff);
+    --h1-color: #ffffff;
+    --h1-span: #ffaa33;
+    --h2-color: #ffffff;
+    --h2-span: #ffaa33;
+    --h3-color: #ffffff;
+    --icon-color: #ffffff;
+
+    /* 产品下载按钮：描边反白 */
+    --dl-bg: transparent;
+    --dl-color: #ffffff;
+    --dl-border: 2px solid #ffffff;
+    --dl-radius: 0;
+    --dl-hover-bg: #ffffff;
+    --dl-hover-color: #000000;
+    --dl-hover-shadow: 0 0 30px rgba(255, 255, 255, 0.04);
+
+    /* 头像 / 团队链接 */
+    --avatar-grad: linear-gradient(45deg, #ffaa33, #3388ff);
+    --avatar-color: #000000;
+    --member-link: #3388ff;
+    --member-link-hover: #ffaa33;
+    --member-link-border: rgba(51, 136, 255, 0.15);
+    --member-link-padding: 4px 14px;
+
+    /* 回到顶部：描边方块 */
+    --b2t-bg: #000000;
+    --b2t-color: #ffffff;
+    --b2t-border: 2px solid #ffffff;
+    --b2t-radius: 0;
+    --b2t-shadow: none;
+    --b2t-hover-border: #ffaa33;
+    --b2t-hover-color: #ffaa33;
+
+    /* GitHub 页脚链接：描边盒子 */
+    --gh-color: #888888;
+    --gh-hover: #ffffff;
+    --gh-border: rgba(255, 255, 255, 0.05);
+    --gh-hover-border: #ffffff;
+}
+
+/* ------------------------------------------------------------------
+   2. 页面骨架
+   ------------------------------------------------------------------ */
+body {
+    background-color: var(--page-bg);
+    background-image: var(--page-bg-image);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--text);
+    line-height: 1.6;
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+/* 网格底纹：仅深色 */
+body::before {
+    content: '';
+    display: var(--grid);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+   3. 顶栏与导航
+   ------------------------------------------------------------------ */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--header-bg);
+    border-bottom: var(--header-border);
+    box-shadow: var(--header-shadow);
+    display: flex;
+    align-items: center;
+    padding: 12px 5%;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+header.shrink {
+    padding: 6px 5%;
+    background: var(--header-bg-shrink);
+    border-bottom-color: var(--header-border-shrink);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    transition: all 0.3s ease;
+}
+
+.logo img {
+    height: 44px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+header.shrink .logo img {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--logo-color);
+    transition: all 0.3s ease;
+    margin-left: 12px;
+}
+
+html[data-theme="dark"] .logo-text {
+    letter-spacing: 1px;
+}
+
+.logo-text-default {
+    display: inline-block;
+}
+
+.logo-text-shrink {
+    display: none;
+}
+
+header.shrink .logo-text-default {
+    display: none;
+}
+
+header.shrink .logo-text-shrink {
+    display: inline-block;
+    margin-left: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--logo-shrink-color);
+}
+
+header.shrink .logo {
+    margin-right: 20px;
+}
+
+nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 4px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--nav-color);
+    font-weight: 500;
+    font-size: 16px;
+    padding: 8px 18px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--nav-hover-color);
+    background: var(--nav-hover-bg);
+    border-color: var(--nav-hover-border);
+}
+
+.btn {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 8px 14px;
+    border: 1px solid var(--btn-border);
+    border-radius: var(--radius-pill);
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.kol-btn:hover {
+    color: var(--kol-hover);
+    border-color: var(--kol-hover);
+    background: var(--btn-hover-bg);
+}
+
+.theme-btn:hover {
+    color: var(--theme-hover);
+    border-color: var(--theme-hover);
+    background: var(--btn-hover-bg);
+}
+
+/* 切换按钮文字：由当前主题控制显示哪一个 */
+html[data-theme="dark"] .t-dark {
+    display: none;
+}
+
+html:not([data-theme="dark"]) .t-light {
+    display: none;
+}
+
+/* ------------------------------------------------------------------
+   4. 内容面板（首页 / 关于 / 产品 共用的大容器）
+   ------------------------------------------------------------------ */
+.main-content,
+.about-content,
+.products-content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px;
+    background: var(--panel-bg);
+    border: var(--panel-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--panel-shadow);
+}
+
+.about-content {
+    max-width: 1000px;
+}
+
+/* ------------------------------------------------------------------
+   5. 大标题
+   ------------------------------------------------------------------ */
+.gradient-text {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: var(--hero-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 20px;
+    margin: 50px 0;
+    transition: all 0.5s ease;
+}
+
+.gradient-text:hover {
+    transform: scale(1.05);
+}
+
+/* 深色：渐变流动动画（原 _d 效果） */
+html[data-theme="dark"] .gradient-text {
+    background-size: 300% 300%;
+    margin: 40px 0 30px;
+    animation: gradShift 6s ease-in-out infinite;
+    letter-spacing: 2px;
+}
+
+html[data-theme="dark"] .gradient-text:hover {
+    transform: none;
+}
+
+@keyframes gradShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ------------------------------------------------------------------
+   6. 区块与功能卡片
+   ------------------------------------------------------------------ */
+.content-section {
+    margin: 60px 0;
+    padding: 30px;
+    background: var(--section-bg);
+    border: var(--section-border);
+    border-radius: var(--radius-panel);
+    box-shadow: var(--section-shadow);
+    transition: all 0.3s ease;
+}
+
+.content-section:hover {
+    box-shadow: var(--section-hover-shadow);
+}
+
+.content-section h2 {
+    color: var(--h2-color);
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+}
+
+.content-section h2 span {
+    color: var(--h2-span);
+}
+
+.content-section p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: var(--card-hover-bg);
+    box-shadow: var(--card-hover-shadow);
+}
+
+.feature-icon {
+    display: block;
+    font-size: 38px;
+    margin-bottom: 15px;
+    color: var(--icon-color);
+}
+
+.feature-card h3 {
+    color: var(--h3-color);
+    font-size: 1.15rem;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* 深色：区块/卡片交替强调色（原 _d 效果） */
+html[data-theme="dark"] .content-section {
+    margin: 60px 0;
+}
+
+html[data-theme="dark"] .content-section:hover {
+    border-color: #ffffff;
+}
+
+html[data-theme="dark"] .content-section:nth-child(odd):hover {
+    border-color: var(--accent-a);
+}
+
+html[data-theme="dark"] .content-section:nth-child(even):hover {
+    border-color: var(--accent-b);
+}
+
+html[data-theme="dark"] .content-section:nth-child(odd) h2 {
+    color: var(--accent-a);
+}
+
+html[data-theme="dark"] .content-section:nth-child(even) h2 {
+    color: var(--accent-b);
+}
+
+html[data-theme="dark"] .content-section:nth-child(odd) h2 span {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .content-section h2 {
+    letter-spacing: 1px;
+}
+
+html[data-theme="dark"] .features-grid {
+    gap: 24px;
+    margin: 30px 0;
+}
+
+html[data-theme="dark"] .feature-card {
+    padding: 28px 22px;
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .feature-card:hover {
+    transform: translateY(-4px);
+}
+
+html[data-theme="dark"] .feature-card:nth-child(1):hover {
+    border-color: var(--accent-b);
+    box-shadow: 0 0 40px rgba(51, 136, 255, 0.02);
+}
+
+html[data-theme="dark"] .feature-card:nth-child(2):hover {
+    border-color: var(--accent-a);
+    box-shadow: 0 0 40px rgba(255, 170, 51, 0.02);
+}
+
+html[data-theme="dark"] .feature-card:nth-child(3):hover {
+    border-color: var(--accent-c);
+    box-shadow: 0 0 40px rgba(0, 255, 170, 0.02);
+}
+
+html[data-theme="dark"] .feature-icon {
+    background: linear-gradient(135deg, #ffffff, #888888);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+html[data-theme="dark"] .feature-card:nth-child(2) .feature-icon {
+    background: linear-gradient(135deg, #ffaa33, #ff6644);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+html[data-theme="dark"] .feature-card:nth-child(3) .feature-icon {
+    background: linear-gradient(135deg, #00ffaa, #33ff88);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+html[data-theme="dark"] .feature-card h3 {
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+/* 浅色：卡片按位使用蓝/橙/绿强调 */
+html:not([data-theme="dark"]) .feature-card:nth-child(1):hover,
+html:not([data-theme="dark"]) .product-card:nth-child(1):hover {
+    border-color: var(--accent);
+}
+
+html:not([data-theme="dark"]) .feature-card:nth-child(2):hover,
+html:not([data-theme="dark"]) .product-card:nth-child(2):hover {
+    border-color: var(--accent-orange);
+}
+
+html:not([data-theme="dark"]) .feature-card:nth-child(3):hover,
+html:not([data-theme="dark"]) .product-card:nth-child(3):hover {
+    border-color: var(--accent-green);
+}
+
+html:not([data-theme="dark"]) .feature-card:nth-child(2) .feature-icon {
+    color: var(--accent-orange);
+}
+
+html:not([data-theme="dark"]) .feature-card:nth-child(3) .feature-icon {
+    color: var(--accent-green);
+}
+
+/* 浅色：悬停显现强调色描边 */
+html:not([data-theme="dark"]) .content-section:hover,
+html:not([data-theme="dark"]) .about-card:hover,
+html:not([data-theme="dark"]) .team-member:hover {
+    border-color: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   7. 关于页组件
+   ------------------------------------------------------------------ */
+.about-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-header h1 {
+    color: var(--h1-color);
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.about-header h1 span {
+    color: var(--h1-span);
+}
+
+.about-header p {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.about-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.about-card {
+    background: var(--section-bg);
+    border: var(--section-border);
+    border-radius: var(--radius-card);
+    padding: 30px;
+    text-align: center;
+    box-shadow: var(--section-shadow);
+    transition: all 0.3s ease;
+}
+
+.about-card:hover {
+    box-shadow: var(--section-hover-shadow);
+}
+
+.about-card h3 {
+    color: var(--h3-color);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.about-card p {
+    color: var(--muted);
+}
+
+html[data-theme="dark"] .about-card {
+    background: var(--card-bg);
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .about-card:hover {
+    border-color: #ffffff;
+}
+
+html[data-theme="dark"] .about-card h3 {
+    color: var(--accent-a);
+}
+
+.team-section {
+    margin-top: 50px;
+}
+
+.team-section h2 {
+    text-align: center;
+    color: var(--h2-color);
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.team-section h2 span {
+    color: var(--h2-span);
+}
+
+html[data-theme="dark"] .team-section h2 {
+    letter-spacing: 1px;
+}
+
+html[data-theme="dark"] .team-section h2 span {
+    color: var(--accent-b);
+}
+
+.team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+.team-member {
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+    background: var(--card-bg);
+    border: var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 24px 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover {
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-4px);
+}
+
+html[data-theme="dark"] .team-member {
+    background: var(--panel-bg);
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .team-member:hover {
+    border-color: #ffffff;
+    transform: none;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+.member-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--avatar-grad);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--avatar-color);
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.team-member h4 {
+    color: var(--h3-color);
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+html[data-theme="dark"] .team-member h4 {
+    color: var(--text);
+}
+
+.team-member p {
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.team-member a {
+    color: var(--member-link);
+    text-decoration: none;
+    border: 1px solid var(--member-link-border);
+    border-radius: var(--radius-pill);
+    padding: var(--member-link-padding);
+    display: inline-block;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.team-member a:hover {
+    color: var(--member-link-hover);
+    border-color: var(--member-link-hover);
+}
+
+/* ------------------------------------------------------------------
+   8. 产品页组件
+   ------------------------------------------------------------------ */
+.products-content h1 {
+    text-align: center;
+    color: var(--h1-color);
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+}
+
+.products-content h1 span {
+    color: var(--h1-span);
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+.product-card {
+    background: var(--section-bg);
+    border: var(--section-border);
+    border-radius: var(--radius-card);
+    padding: 30px;
+    text-align: center;
+    width: 100%;
+    box-shadow: var(--section-shadow);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--section-hover-shadow);
+}
+
+html[data-theme="dark"] .product-card {
+    background: var(--card-bg);
+    box-shadow: none;
+}
+
+html[data-theme="dark"] .product-card:hover {
+    transform: translateY(-4px);
+    border-color: #ffffff;
+}
+
+html[data-theme="dark"] .product-card:nth-child(1):hover {
+    border-color: var(--accent-b);
+    box-shadow: 0 0 40px rgba(51, 136, 255, 0.02);
+}
+
+html[data-theme="dark"] .product-card:nth-child(2):hover {
+    border-color: var(--accent-a);
+    box-shadow: 0 0 40px rgba(255, 170, 51, 0.02);
+}
+
+html[data-theme="dark"] .product-card:nth-child(3):hover {
+    border-color: var(--accent-c);
+    box-shadow: 0 0 40px rgba(0, 255, 170, 0.02);
+}
+
+.product-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.product-card h3 {
+    color: var(--h3-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+html[data-theme="dark"] .product-card h3 {
+    color: var(--text);
+}
+
+.product-card p {
+    color: var(--muted);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--dl-bg);
+    color: var(--dl-color);
+    border: var(--dl-border);
+    border-radius: var(--dl-radius);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: var(--dl-hover-bg);
+    color: var(--dl-hover-color);
+    box-shadow: var(--dl-hover-shadow);
+}
+
+/* 深色：下载按钮按卡片交替强调色（原 _d 效果） */
+html[data-theme="dark"] .product-card:nth-child(1) .download-btn {
+    border-color: var(--accent-b);
+    color: var(--accent-b);
+}
+
+html[data-theme="dark"] .product-card:nth-child(1) .download-btn:hover {
+    background: var(--accent-b);
+    color: #000000;
+    box-shadow: 0 0 30px rgba(51, 136, 255, 0.04);
+}
+
+html[data-theme="dark"] .product-card:nth-child(2) .download-btn {
+    border-color: var(--accent-a);
+    color: var(--accent-a);
+}
+
+html[data-theme="dark"] .product-card:nth-child(2) .download-btn:hover {
+    background: var(--accent-a);
+    color: #000000;
+    box-shadow: 0 0 30px rgba(255, 170, 51, 0.04);
+}
+
+html[data-theme="dark"] .product-card:nth-child(3) .download-btn {
+    border-color: var(--accent-c);
+    color: var(--accent-c);
+}
+
+html[data-theme="dark"] .product-card:nth-child(3) .download-btn:hover {
+    background: var(--accent-c);
+    color: #000000;
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.04);
+}
+
+/* ------------------------------------------------------------------
+   9. 回到顶部
+   ------------------------------------------------------------------ */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 48px;
+    height: 48px;
+    background: var(--b2t-bg);
+    border: var(--b2t-border);
+    border-radius: var(--b2t-radius);
+    color: var(--b2t-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: var(--b2t-shadow);
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    border-color: var(--b2t-hover-border);
+    color: var(--b2t-hover-color);
+    transform: scale(1.04);
+}
+
+html[data-theme="dark"] .back-to-top:hover {
+    box-shadow: 0 0 30px rgba(255, 170, 51, 0.02);
+}
+
+/* ------------------------------------------------------------------
+   10. 页脚（两个主题固定为黑底，不随主题变化）
+   ------------------------------------------------------------------ */
+.footer-bar {
+    background: #000000;
+    border-top: 2px solid #333333;
+    padding: 18px 0;
+    width: 100%;
+    margin-top: 40px;
+    transition: border-color 0.3s ease;
+}
+
+.footer-bar:hover {
+    border-top-color: #ffffff;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--gh-color);
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid var(--gh-border);
+    border-radius: var(--radius-pill);
+    padding: 6px 16px;
+    transition: all 0.3s ease;
+}
+
+.github-link:hover {
+    color: var(--gh-hover);
+    border-color: var(--gh-hover-border);
+    transform: translateX(4px);
+}
+
+.github-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+    transition: all 0.3s ease;
+}
+
+.github-link:hover .github-icon {
+    filter: invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.1));
+}
+
+/* 浅色：GitHub 图标悬停保持白色，不加彩色 */
+html:not([data-theme="dark"]) .github-link:hover .github-icon {
+    filter: invert(1) drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+}
+
+/* ------------------------------------------------------------------
+   11. 响应式
+   ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 4%;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .btn {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    header.shrink .logo-text-shrink {
+        font-size: 16px;
+    }
+
+    .gradient-text {
+        font-size: 2.2rem;
+    }
+
+    .features-grid,
+    .products-container,
+    .about-details,
+    .team-container {
+        grid-template-columns: 1fr;
+    }
+
+    .main-content,
+    .about-content,
+    .products-content {
+        padding: 20px 16px;
+        margin: 20px 12px;
+    }
+
+    .content-section {
+        padding: 20px 16px;
+        margin: 30px 0;
+    }
+
+    .about-details {
+        gap: 20px;
+    }
+
+    .team-member {
+        max-width: 100%;
+    }
+
+    nav {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    nav ul {
+        gap: 0;
+    }
+
+    nav ul li {
+        margin-left: 0;
+    }
+
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .about-header h1,
+    .products-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* 深色移动端：描边减细为 1px（原 _d 效果） */
+@media (max-width: 768px) {
+    html[data-theme="dark"] header {
+        border-bottom-width: 1px;
+    }
+
+    html[data-theme="dark"] .main-content,
+    html[data-theme="dark"] .about-content,
+    html[data-theme="dark"] .products-content,
+    html[data-theme="dark"] .content-section,
+    html[data-theme="dark"] .feature-card,
+    html[data-theme="dark"] .product-card,
+    html[data-theme="dark"] .about-card,
+    html[data-theme="dark"] .team-member,
+    html[data-theme="dark"] .back-to-top {
+        border-width: 1px;
+    }
+
+    html[data-theme="dark"] .footer-bar {
+        border-top-width: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        height: 32px;
+    }
+
+    .logo-text {
+        font-size: 15px;
+        margin-left: 8px;
+    }
+
+    .gradient-text {
+        font-size: 1.8rem;
+    }
+
+    nav ul li a {
+        font-size: 13px;
+        padding: 4px 10px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    header.shrink .logo-text-shrink {
+        font-size: 14px;
+    }
+
+    .content-section {
+        padding: 16px 12px;
+    }
+
+    .feature-card {
+        padding: 20px 16px;
+    }
+
+    .about-card {
+        padding: 20px 16px;
+    }
+
+    .team-member {
+        padding: 16px 12px;
+    }
+
+    .member-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+    }
+
+    .about-header h1,
+    .products-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .download-btn {
+        padding: 10px 20px;
+    }
+}

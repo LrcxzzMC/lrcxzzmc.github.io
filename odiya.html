@@ -1,64 +1,59 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OdiyaOS · 下载</title>
-    <link rel="icon" href="./webside_icon.png" type="image/png">
+    <link rel="icon" href="./website_icon.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./theme.css">
+    <script>
+        // 主题初始化：优先读记忆，默认浅色（放在 head 里避免闪烁）
+        (function () {
+            var saved = localStorage.getItem('kicoso-theme');
+            document.documentElement.dataset.theme = saved === 'dark' ? 'dark' : 'light';
+        })();
+    </script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #f8f6f4;
-            font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
-            min-height: 100vh;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .container {
+        /* 本页专属：版本列表（主题令牌配色） */
+        .odiya-container {
             max-width: 720px;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--panel-bg);
+            border: var(--panel-border);
+            border-radius: var(--radius-panel);
+            box-shadow: var(--panel-shadow);
         }
 
-        .header {
+        .odiya-header {
             text-align: center;
-            padding: 30px 0 20px 0;
-            border-bottom: 2px solid #e0d8d0;
+            padding: 20px 0;
+            border-bottom: var(--section-border);
             margin-bottom: 30px;
         }
 
-        .header h1 {
-            font-size: 2.4rem;
+        .odiya-header h1 {
+            font-size: 2.2rem;
             font-weight: 300;
-            color: #1a1a1a;
+            color: var(--h1-color);
             letter-spacing: 6px;
         }
 
-        .header .sub {
-            color: #999;
+        .odiya-header h1 span {
+            color: var(--h1-span);
+        }
+
+        html[data-theme="dark"] .odiya-header h1 span {
+            color: var(--accent-a);
+        }
+
+        .odiya-header .sub {
+            color: var(--muted);
             font-size: 0.9rem;
             letter-spacing: 4px;
             margin-top: 4px;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #999;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-
-        .back-link:hover {
-            color: #e67e22;
         }
 
         .version-item {
@@ -66,67 +61,66 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 22px;
-            margin-bottom: 8px;
-            background: #ffffff;
-            border: 1px solid #e8e4e0;
-            border-radius: 6px;
-            transition: all 0.3s;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            margin-bottom: 10px;
+            background: var(--card-bg);
+            border: var(--card-border);
+            border-radius: var(--radius-card);
+            transition: all 0.3s ease;
         }
 
         .version-item:hover {
-            border-color: #e67e22;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            background: var(--card-hover-bg);
             transform: translateY(-2px);
         }
 
+        html:not([data-theme="dark"]) .version-item:nth-child(odd):hover {
+            border-color: var(--accent-orange);
+        }
+
+        html:not([data-theme="dark"]) .version-item:nth-child(even):hover {
+            border-color: var(--accent);
+        }
+
+        html[data-theme="dark"] .version-item:hover {
+            border-color: #ffffff;
+        }
+
         .version-item .name {
-            color: #333;
+            color: var(--text);
             font-size: 1rem;
             font-weight: 500;
             letter-spacing: 1px;
         }
 
         .version-item .name .ver {
-            color: #e67e22;
+            color: var(--accent-orange);
             font-weight: 600;
         }
 
+        html[data-theme="dark"] .version-item .name .ver {
+            color: var(--accent-a);
+        }
+
         .version-item .download-link {
-            color: #888;
+            color: var(--btn-color);
             text-decoration: none;
             font-size: 0.85rem;
             padding: 6px 20px;
-            border: 1px solid #e0d8d0;
-            border-radius: 4px;
-            transition: all 0.3s;
+            border: 1px solid var(--btn-border);
+            border-radius: var(--radius-pill);
+            transition: all 0.3s ease;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .version-item .download-link:hover {
-            border-color: #e67e22;
-            color: #e67e22;
-            background: rgba(230,126,34,0.02);
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
         }
 
-        .footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #e8e4e0;
-            text-align: center;
-            color: #ccc;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-        }
-
-        .footer a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: #e67e22;
+        html[data-theme="dark"] .version-item .download-link:hover {
+            border-color: var(--accent-a);
+            color: var(--accent-a);
         }
 
         @media (max-width: 600px) {
@@ -136,29 +130,81 @@
                 align-items: stretch;
                 text-align: center;
             }
-            .header h1 { font-size: 1.8rem; letter-spacing: 4px; }
+            .odiya-header h1 { font-size: 1.8rem; letter-spacing: 4px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <a href="./index.html" class="back-link">← 返回首页</a>
+    <header id="header">
+        <div class="logo">
+            <img src="./kicoso.png" alt="Kicoso Logo">
+            <span class="logo-text logo-text-default">kicoso</span>
+            <span class="logo-text logo-text-shrink">Kicoso Studios</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./index.html">首页</a></li>
+                <li><a href="./products.html">我们的产品</a></li>
+            </ul>
+            <a href="#" id="themeToggle" class="btn theme-btn">
+                <span class="t-dark"><i class="fas fa-moon"></i> 深色</span>
+                <span class="t-light"><i class="fas fa-sun"></i> 浅色</span>
+            </a>
+        </nav>
+    </header>
 
-        <div class="header">
-            <h1>💿 OdiyaOS</h1>
+    <div class="odiya-container">
+        <div class="odiya-header">
+            <h1><span>OdiyaOS</span></h1>
             <div class="sub">// 永远不会停更的操作系统 · 伪</div>
         </div>
 
         <div class="version-item">
-            <span class="name"><span class="ver">OdiyaOS Python Re3</span>
-            <a href="https://www.123865.com/s/pFvgTd-yTgtd" class="download-link">▸ 下载</a>
+            <span class="name"><span class="ver">OdiyaOS Python Re3</span></span>
+            <a href="https://www.123865.com/s/pFvgTd-yTgtd" class="download-link">下载</a>
         </div>
         <div class="version-item">
-            <span class="name"><span class="ver">OdiyaDOS</span>
-            <a href="https://github.com/LrcxzzMC/odos/releases/download/rel/ODIYADOSOS.iso" class="download-link">▸ 下载</a>
+            <span class="name"><span class="ver">OdiyaDOS</span></span>
+            <a href="https://github.com/LrcxzzMC/odos/releases/download/rel/ODIYADOSOS.iso" class="download-link">下载</a>
         </div>
     </div>
+
+    <footer class="footer-bar">
+        <div class="footer-content">
+            <a href="https://github.com/LrcxzzMC/lrcxzzmc.github.io" target="_blank" class="github-link">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="github-icon">
+                <span>源码</span>
+            </a>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // 主题切换：只翻转 data-theme，样式全在 theme.css 里
+        document.getElementById('themeToggle').addEventListener('click', function (e) {
+            e.preventDefault();
+            var root = document.documentElement;
+            var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            localStorage.setItem('kicoso-theme', next);
+        });
+
+        // 滚动：顶栏收缩 + 回到顶部
+        window.addEventListener('scroll', function () {
+            var header = document.getElementById('header');
+            var backToTop = document.getElementById('backToTop');
+            header.classList.toggle('shrink', window.scrollY > 80);
+            backToTop.classList.toggle('visible', window.scrollY > 400);
+        });
+
+        document.getElementById('backToTop').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 
 </body>
 </html>
